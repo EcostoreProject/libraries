@@ -1,0 +1,22 @@
+name: Compile examples
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/compile-sketches@v1
+        with:
+          fqbn: arduino:avr:mega
+          libraries: |
+            - source-path: ./FrameProtocol
+            - source-path: ./XBeeAT
+            - source-path: ./EcostoreNodes
+          sketch-paths: |
+            - ./FrameProtocol/examples
+            - ./XBeeAT/examples
+            - ./EcostoreNodes/examples
